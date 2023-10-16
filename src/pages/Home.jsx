@@ -1,5 +1,4 @@
 import todoBG from "../assets/images/todoBG.svg";
-import Navbar from "../components/Navbar";
 import boy from "../assets/images/boy.png";
 import { BsPen } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
@@ -15,9 +14,10 @@ const Home = () => {
         alt=""
         className=" h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
       />
-      <div className="h-screen w-screen overflow-x-hidden">
-        {/* <Navbar /> */}
-        <div className=" h-[100px] w-full px-32 flex items-center gap-4">
+      <div className="h-screen w-screen overflow-x-hidden ">
+        <div
+          className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
+        >
           <div className="flex-1 w-[100px] h-full flex items-center ">
             <div className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
               <BsPen />
