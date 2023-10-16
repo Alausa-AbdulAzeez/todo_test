@@ -1,6 +1,7 @@
 import todoBG from '../assets/images/todoBG.svg'
 import Navbar from '../components/Navbar'
 import boy from '../assets/images/boy.png'
+import { BsPen } from 'react-icons/bs'
 
 const Home = () => {
   // CATEGORY DATA
@@ -14,7 +15,20 @@ const Home = () => {
         className=' h-screen w-screen absolute top-0 left-0 object-cover -z-[1]'
       />
       <div className='h-screen w-screen'>
-        <Navbar />
+        {/* <Navbar /> */}
+        {/* <div className='bg-slate-400 h-[100px] w-full px-32 flex items-center'>
+          <div className='flex-1 w-[100px] bg-blue-100 h-full flex items-center'>
+            <div className='cursor-pointer flex h-[40px] bg-white '>
+              <BsPen />
+              <div className=''>New Task</div>
+            </div>
+          </div>
+          <div className='flex-[4] bg-red-300'>
+            <div className=''>
+              <input type='text' />
+            </div>
+          </div>
+        </div> */}
         <div className='px-32 mt-5 flex w-full flex-wrap gap-[30px]'>
           {category?.map((cat, index) => {
             return (
