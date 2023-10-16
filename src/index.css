@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+/* Custom glowing effect class */
+.glow-text {
+  /* animation: glow 2s infinite alternate; */
+  text-shadow: 0 0 10px #4a4b4b7c, 0 0 20px #4a4b4b7c, 0 0 30px #4a4b4b7c;
+  transition: all 0.3s;
+}
+.glow-text:hover {
+  /* animation: glow 2s infinite alternate; */
+  transform: translateY(-5px);
+  text-shadow: 0 0 10px #4a4b4b, 0 0 20px #4a4b4b, 0 0 30px #4a4b4b;
+}
+
+/* @keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #4a4b4b, 0 0 20px #4a4b4b, 0 0 30px #4a4b4b;
+  }
+  100% {
+    text-shadow: 0 0 20px #4a4b4b, 0 0 30px #4a4b4b, 0 0 40px #4a4b4b;
+  }
+} */
+
+/* CATEGORY CARD */
+.category {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 10px 20px 5px #00000023;
+  transition: all 0.3s;
+}
+
+.category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px 5px #00000040;
+}
