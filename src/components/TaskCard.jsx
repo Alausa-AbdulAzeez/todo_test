@@ -1,8 +1,19 @@
-import { copy } from '../assets/images'
+import { copy, tick } from '../assets/images'
 
-const TaskCard = ({ todo }) => {
+const TaskCard = ({ todo, setCopied, copied }) => {
   // TASK PROPS
   const { id, title, description, category, dateCreated } = todo
+
+  // COPY TO CLIPBOARD FUNCTION
+  const handleCopy = () => {
+    setCopied(description)
+    navigator.clipboard.writeText(description)
+
+    // SET COPIED BACK TO DEFAULT AFTER 3 SECONDS
+    setTimeout(() => setCopied(''), 3000)
+  }
+
+  // END OF COPY TO CLIPBOARD FUNCTION
 
   return (
     <div
@@ -11,15 +22,25 @@ const TaskCard = ({ todo }) => {
     >
       <div className='flex flex-col flex-1 bg-white  h-[110px] overflow-y-auto overflow-x-hidden relative items-center'>
         <h3 className='font-bold text-lg text-left w-full text-[#494949]'>
-          {title} <span className='ml-5 text-mainPurple'>({category})</span>
+          {title} <span className='ml-5 text-mainGreen'>({category})</span>
         </h3>
         <h3 className='font-bold text-md text-left w-full text-[#999]'>
           {description}
         </h3>
         <div className='absolute bottom-[0px] w-[100%] h-[35px] flex justify-between'>
           <div className='flex items-center gap-3 h-full '>
-            <div className='text-md h-full  font-semibold bg-mainYellow flex items-center justify-center py-2 px-3 copyContainer rounded-[4px] ml-2'>
-              <img src={copy} alt='copy icon' className='w-[25px] h-[25px]' />
+            <div
+              className='text-md h-full  font-semibold bg-mainYellow flex items-center justify-center py-2 px-3 copyContainer rounded-[4px] ml-2'
+              onClick={handleCopy}
+            >
+              {copied === description && (
+                <p className='text-xs ml-2 text-mainGreen'>Copied!</p>
+              )}
+              <img
+                src={copied === description ? tick : copy}
+                alt='copy icon'
+                className='w-[25px] h-[25px]'
+              />
             </div>
 
             <h3 className='font-bold text-sm text-left w-full text-[#999]'>

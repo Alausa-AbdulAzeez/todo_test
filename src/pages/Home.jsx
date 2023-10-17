@@ -10,6 +10,7 @@ import {
 import { BsPen } from 'react-icons/bs'
 import { HiSearch } from 'react-icons/hi'
 import TaskCard from '../components/TaskCard'
+import { useState } from 'react'
 
 const Home = () => {
   // TODOS
@@ -56,6 +57,9 @@ const Home = () => {
       completed: true,
     },
   ]
+
+  // CURRENTLY COPIED PROMPT
+  const [copied, setCopied] = useState('')
 
   // CATEGORY DATA
   const category = [1, 2, 3, 4, 5, 6]
@@ -104,7 +108,14 @@ const Home = () => {
           </h1>
           {todoData?.map((todo) => {
             const { id } = todo
-            return <TaskCard todo={todo} key={id} />
+            return (
+              <TaskCard
+                todo={todo}
+                key={id}
+                setCopied={setCopied}
+                copied={copied}
+              />
+            )
           })}
         </div>
         <div className='flex-1 flex flex-col gap-3 items-center  overflow-y-auto'>
@@ -146,30 +157,6 @@ const Home = () => {
             )
           })}
         </div>
-        {/* <div className="px-32 mt-5 flex w-full flex-wrap gap-[30px]">
-          {category?.map((cat, index) => {
-            return (
-              <div
-                className="category h-[150px] min-w-[300px]  flex-1 p-2 flex items-center"
-                key={index}
-              >
-                <div className="w-[100px] h-[100px]">
-                  <img
-                    src={boy}
-                    alt="category icon"
-                    className="w-full h-full"
-                  />
-                </div>
-                <div className="flex flex-col flex-1 bg-white pl-8">
-                  <h1 className="font-bold text-2xl ">Personal</h1>
-                  <p className="text-mainBlack opacity-[0.5] text-base font-bold">
-                    7 tasks
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div> */}
       </div>
     </>
   )
