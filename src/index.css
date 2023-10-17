@@ -42,7 +42,7 @@
 }
 
 .category:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) !important;
   box-shadow: 0 10px 20px 5px #00000040;
 }
 
