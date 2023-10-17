@@ -1,4 +1,5 @@
 import todoBG from "../assets/images/todoBG.svg";
+import copy from "../assets/images/copy.svg";
 import boy from "../assets/images/boy.png";
 import { BsPen } from "react-icons/bs";
 import { HiSearch } from "react-icons/hi";
@@ -7,6 +8,8 @@ const Home = () => {
   // CATEGORY DATA
   const category = [1, 2, 3, 4, 5, 6];
 
+  // SLIDER SETTINGS
+
   return (
     <>
       <img
@@ -14,28 +17,73 @@ const Home = () => {
         alt=""
         className=" h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
       />
-      <div className="h-screen w-screen overflow-x-hidden ">
-        <div
-          className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
-        >
-          <div className="flex-1 w-[100px] h-full flex items-center ">
-            <div className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
-              <BsPen />
-              <div className="ml-3 ">New Task</div>
-            </div>
-          </div>
-          <div className=" flex flex-[4] h-full  items-center">
-            <div className="h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer ">
-              <HiSearch className="text-2xl" />
-              <input
-                type="text"
-                className="h-full bg-transparent w-full outline-none border-none ml-4 text-[#999] font-semibold text-lg"
-                placeholder="Search"
-              />
-            </div>
+      <div
+        className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
+      >
+        <div className="flex-1 w-[100px] h-full flex items-center ">
+          <div className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
+            <BsPen />
+            <div className="ml-3 ">New Task</div>
           </div>
         </div>
-        <div className="px-32 mt-5 flex w-full flex-wrap gap-[30px]">
+        <div className=" flex flex-[4] h-full  items-center">
+          <div className="h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer ">
+            <HiSearch className="text-2xl" />
+            <input
+              type="text"
+              className="h-full bg-transparent w-full outline-none border-none ml-4 text-[#999] font-semibold text-lg"
+              placeholder="Search"
+            />
+          </div>
+        </div>
+      </div>
+      <div className=" px-32 h-screen w-screen overflow-x-hidden flex gap-5">
+        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-auto">
+          {category?.map((cat, index) => {
+            return (
+              <div
+                className="task h-[300px] min-w-[300px]  flex-1  flex items-center"
+                key={index}
+              >
+                {/* <div className="w-[100px] h-[100px]">
+                  <img
+                    src={boy}
+                    alt="category icon"
+                    className="w-full h-full"
+                  />
+                </div> */}
+                <div className="flex flex-col flex-1 bg-white  h-[110px] overflow-y-auto overflow-x-hidden relative items-center">
+                  <h3 className="font-bold text-md text-left w-full text-[#999]">
+                    Lorem ipsum dolor sit amet, dolor sit amet,amet,amet,
+                    consectetur adipisicing elit. Architecto debitis,
+                    repudiandae a
+                  </h3>
+                  <div className="absolute bottom-[0px] w-[100%] h-[35px] flex justify-between">
+                    <div className="text-md  font-semibold bg-mainYellow flex items-center justify-center py-2 px-3 copyContainer rounded-[4px] ml-2">
+                      <img src={copy} alt="copy icon" />
+                    </div>
+                    <div className="flex gap-0">
+                      <div className="text-mainPurple py-1 px-3 rounded-[4px] hover:bg-mainPurple hover:text-white  flex items-center font-semibold">
+                        Edit
+                      </div>
+                      <div className="text-mainRed py-1 px-3 rounded-[4px]  hover:bg-mainRed hover:text-white  flex items-center font-semibold">
+                        Delete
+                      </div>
+                      <div className="text-mainGreen py-1 px-3 rounded-[4px] hover:bg-mainGreen hover:text-white  flex items-center font-semibold">
+                        Done
+                      </div>
+                    </div>
+                  </div>
+                  {/* <p className="text-mainBlack opacity-[0.5] text-base font-bold">
+                    7 tasks
+                  </p> */}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="flex-1 bg-black"></div>
+        {/* <div className="px-32 mt-5 flex w-full flex-wrap gap-[30px]">
           {category?.map((cat, index) => {
             return (
               <div
@@ -58,7 +106,7 @@ const Home = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </>
   );
