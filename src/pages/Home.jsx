@@ -8,13 +8,25 @@ import {
   blob6,
 } from '../assets/images/blobs'
 import { BsPen } from 'react-icons/bs'
-import { HiSearch } from 'react-icons/hi'
+import { HiSearch, HiX } from 'react-icons/hi'
 import TaskCard from '../components/TaskCard'
 import { useState } from 'react'
 import { briefcase, education, healthcare, shopping } from '../assets/images'
 import CategoryCard from '../components/CategoryCard'
 
 const Home = () => {
+  // INPUT VALUE
+  const [inputValue, setInputValue] = useState('')
+
+  // INPUT STATE, (FOCUED OR NOT)
+  const [isInputFocused, setInputFocused] = useState(false)
+
+  // FUNCTION TO RESET INPUT VALUE
+  const handleCancelClick = () => {
+    setInputValue('')
+  }
+  // END OF FUNCTION TO RESET INPUT VALUE
+
   // TODOS
   const todoData = [
     {
@@ -108,6 +120,36 @@ const Home = () => {
   }
   // END OF FUNCTION TO GET A RANDOM BLOB
 
+  // FUNCTION TO FILTER TASKS BASED ON INPUT VALUE
+  const filteredTasks = (inputText) => {
+    todoData.filter((task) => {
+      return (
+        task.title.toLowerCase().includes(inputText.toLowerCase()) ||
+        task.description.toLowerCase().includes(inputText.toLowerCase())
+      )
+    })
+  }
+  // END OF FUNCTION TO FILTER TASKS BASED ON INPUT VALUE
+
+  // FUNCTION TO FILTER CATEGORIES BASED ON INPUT VALUE
+  const filteredCategories = (inputText) => {
+    categoryData.filter((category) => {
+      return category.name.toLowerCase().includes(inputText.toLowerCase())
+    })
+  }
+  // END OF FUNCTION TO FILTER CATEGORIES BASED ON INPUT VALUE
+
+  // FUNCTION TO HANDLE INPUT CHANGE
+  const handleInputChange = (e) => {
+    const inputText = e.target.value
+    setInputValue(inputText)
+
+    // Filter categories
+
+    // Update your category and task lists here or set them in the state
+  }
+  // END OF FUNCTION TO HANDLE INPUT CHANGE
+
   return (
     <>
       <img
@@ -125,13 +167,27 @@ const Home = () => {
           </div>
         </div>
         <div className=' flex flex-[4] h-full  items-center'>
-          <div className='h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer '>
+          <div
+            className={`h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer ${
+              isInputFocused && 'drop-shadow-2xl'
+            }`}
+          >
             <HiSearch className='text-2xl' />
             <input
               type='text'
               className='h-full bg-transparent w-full outline-none border-none ml-4 text-[#999] font-semibold text-lg'
               placeholder='Search'
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
+              value={inputValue}
+              onChange={(e) => handleInputChange(e)}
             />
+            {inputValue && (
+              <HiX
+                className='text-2xl cursor-pointer'
+                onClick={handleCancelClick}
+              />
+            )}
           </div>
         </div>
       </div>
