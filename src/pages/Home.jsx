@@ -81,34 +81,81 @@ const Home = () => {
       id: 1,
       name: "Work",
       image: briefcase,
-      tasks: 8,
+      tasks: [
+        {
+          id: 1,
+          title: "Finish React Project",
+          description:
+            "Complete the frontend and backend integration for the React project.",
+          category: "Work",
+          dateCreated: "2023-10-15",
+          completed: false,
+        },
+        {
+          id: 3,
+          title: "Prepare Presentation",
+          description: "Create a presentation for the upcoming meeting.",
+          category: "Work",
+          dateCreated: "2023-10-17",
+          completed: true,
+        },
+      ],
     },
     {
       id: 2,
       name: "Personal",
       image: shopping,
-      tasks: 3,
+      tasks: [
+        {
+          id: 2,
+          title: "Grocery Shopping",
+          description: "Buy fruits, vegetables, and household essentials.",
+          category: "Personal",
+          dateCreated: "2023-10-16",
+          completed: false,
+        },
+        {
+          id: 5,
+          title: "Read a Book",
+          description: "Spend an hour reading a new novel.",
+          category: "Personal",
+          dateCreated: "2023-10-19",
+          completed: true,
+        },
+      ],
     },
     {
       id: 3,
       name: "Health",
       image: healthcare,
-      tasks: 6,
+      tasks: [
+        {
+          id: 4,
+          title: "Gym Workout",
+          description: "Hit the gym for a workout session.",
+          category: "Health",
+          dateCreated: "2023-10-18",
+          completed: false,
+        },
+      ],
     },
 
     {
       id: 5,
       name: "Education",
       color: education,
-      tasks: 5,
+      tasks: [],
     },
     {
       id: 6,
       name: "General",
       color: null,
-      tasks: 2,
+      tasks: [],
     },
   ];
+
+  // SELECTED CATEGORY
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // FILTERED CATEGORY AND TASKS
   const [filteredCategoryList, setFilteredCategoryList] =
@@ -130,6 +177,7 @@ const Home = () => {
     setInputValue("");
     setFilteredCategoryList(categoryData);
     setFilteredTodoDataList(todoData);
+    setSelectedCategory(null);
   };
   // END OF FUNCTION TO RESET INPUT VALUE
 
@@ -183,10 +231,17 @@ const Home = () => {
         </div>
         <div className=" flex flex-[4] h-full  items-center">
           <div
-            className={`h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer ${
+            className={`h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer relative ${
               isInputFocused && "drop-shadow-2xl"
             }`}
           >
+            {selectedCategory && (
+              <div className="absolute left-14 cursor-pointer flex flex-row-reverse h-[40px] bg-[#cacaca] text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
+                <HiX onClick={() => handleCancelClick()} />
+                <div className="mr-3 ">{selectedCategory?.name}</div>
+              </div>
+            )}
+
             <HiSearch className="text-2xl" />
             <input
               type="text"
@@ -196,6 +251,7 @@ const Home = () => {
               onBlur={() => setInputFocused(false)}
               value={inputValue}
               onChange={(e) => handleInputChange(e)}
+              disabled={selectedCategory ? true : false}
             />
             {inputValue && (
               <HiX
@@ -263,6 +319,9 @@ const Home = () => {
                   key={id}
                   cardStyle={cardStyle}
                   getRandomBlob={getRandomBlob}
+                  setSelectedCategory={setSelectedCategory}
+                  setFilteredTodoDataList={setFilteredTodoDataList}
+                  selectedCategory={selectedCategory}
                 />
               );
             })
