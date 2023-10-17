@@ -1,3 +1,4 @@
 import boy from './boy.png'
+import copy from './copy.svg'
 
-export default { boy }
+export { boy, copy }

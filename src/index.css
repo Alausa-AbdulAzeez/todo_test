@@ -86,3 +86,23 @@
   background-color: rgba(255, 255, 255, 0.253);
   transition: backdrop-filter 0.5s, background-color 0.5s;
 }
+
+/* Define the scrollbar track and thumb styles */
+::-webkit-scrollbar {
+  width: 12px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #cccccc; /* Track color */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f9ea85; /* Thumb color */
+  border-radius: 6px; /* Adjust the border radius to round the thumb */
+}
+
+/* Change thumb color on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f9ea85;
+}

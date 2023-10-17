@@ -1,5 +1,4 @@
 import todoBG from '../assets/images/todoBG.svg'
-import copy from '../assets/images/copy.svg'
 import {
   blob1,
   blob2,
@@ -10,8 +9,54 @@ import {
 } from '../assets/images/blobs'
 import { BsPen } from 'react-icons/bs'
 import { HiSearch } from 'react-icons/hi'
+import TaskCard from '../components/TaskCard'
 
 const Home = () => {
+  // TODOS
+  const todoData = [
+    {
+      id: 1,
+      title: 'Finish React Project',
+      description:
+        'Complete the frontend and backend integration for the React project.',
+      category: 'Work',
+      dateCreated: '2023-10-15',
+      completed: false,
+    },
+    {
+      id: 2,
+      title: 'Grocery Shopping',
+      description: 'Buy fruits, vegetables, and household essentials.',
+      category: 'Personal',
+      dateCreated: '2023-10-16',
+      completed: false,
+    },
+    {
+      id: 3,
+      title: 'Prepare Presentation',
+      description: 'Create a presentation for the upcoming meeting.',
+      category: 'Work',
+      dateCreated: '2023-10-17',
+      completed: true,
+    },
+    {
+      id: 4,
+      title: 'Gym Workout',
+      description: 'Hit the gym for a workout session.',
+      category: 'Health',
+      dateCreated: '2023-10-18',
+      completed: false,
+    },
+    {
+      id: 5,
+      title: 'Read a Book',
+      description: 'Spend an hour reading a new novel.',
+      category: 'Personal',
+      dateCreated: '2023-10-19',
+      completed: true,
+    },
+  ]
+
   // CATEGORY DATA
   const category = [1, 2, 3, 4, 5, 6]
 
@@ -57,50 +102,19 @@ const Home = () => {
           <h1 className='text-2xl font-bold'>
             Task <span className='text-mainPurple'>List</span>{' '}
           </h1>
-          {category?.map((cat, index) => {
-            return (
-              <div
-                className='task h-[300px] min-w-[300px]  flex-1  flex items-center'
-                key={index}
-              >
-                {/* <div className="w-[100px] h-[100px]">
-                  <img
-                    src={boy}
-                    alt="category icon"
-                    className="w-full h-full"
-                  />
-                </div> */}
-                <div className='flex flex-col flex-1 bg-white  h-[110px] overflow-y-auto overflow-x-hidden relative items-center'>
-                  <h3 className='font-bold text-md text-left w-full text-[#999]'>
-                    Lorem ipsum dolor sit amet, dolor sit amet,amet,amet,
-                    consectetur adipisicing elit. Architecto debitis,
-                    repudiandae a
-                  </h3>
-                  <div className='absolute bottom-[0px] w-[100%] h-[35px] flex justify-between'>
-                    <div className='text-md  font-semibold bg-mainYellow flex items-center justify-center py-2 px-3 copyContainer rounded-[4px] ml-2'>
-                      <img src={copy} alt='copy icon' />
-                    </div>
-                    <div className='flex gap-0'>
-                      <div className='text-mainPurple py-1 px-3 rounded-[4px] hover:bg-mainPurple hover:text-white  flex items-center font-semibold'>
-                        Edit
-                      </div>
-                      <div className='text-mainRed py-1 px-3 rounded-[4px]  hover:bg-mainRed hover:text-white  flex items-center font-semibold'>
-                        Delete
-                      </div>
-                      <div className='text-mainGreen py-1 px-3 rounded-[4px] hover:bg-mainGreen hover:text-white  flex items-center font-semibold'>
-                        Done
-                      </div>
-                    </div>
-                  </div>
-                  {/* <p className="text-mainBlack opacity-[0.5] text-base font-bold">
-                    7 tasks
-                  </p> */}
-                </div>
-              </div>
-            )
+          {todoData?.map((todo) => {
+            const { id } = todo
+            return <TaskCard todo={todo} key={id} />
           })}
         </div>
-        <div className='flex-1 flex flex-col gap-3 items-center'>
+        <div className='flex-1 flex flex-col gap-3 items-center  overflow-y-auto'>
+          <div className='flex w-full'>
+            <h1 className='text-2xl font-bold text-left '>Categories</h1>
+            <div className='cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]'>
+              <BsPen />
+              <div className='ml-3 '>New Category</div>
+            </div>
+          </div>
           {category?.map((cat, index) => {
             // Generate a random tilt angle between -10 and 5 degrees
             const tiltAngle = Math.random() * 20 - 5 + 'deg'
