@@ -11,6 +11,8 @@ import { BsPen } from 'react-icons/bs'
 import { HiSearch } from 'react-icons/hi'
 import TaskCard from '../components/TaskCard'
 import { useState } from 'react'
+import { briefcase, education, healthcare, shopping } from '../assets/images'
+import CategoryCard from '../components/CategoryCard'
 
 const Home = () => {
   // TODOS
@@ -62,7 +64,39 @@ const Home = () => {
   const [copied, setCopied] = useState('')
 
   // CATEGORY DATA
-  const category = [1, 2, 3, 4, 5, 6]
+  const categoryData = [
+    {
+      id: 1,
+      name: 'Work',
+      image: briefcase,
+      tasks: 8,
+    },
+    {
+      id: 2,
+      name: 'Personal',
+      image: shopping,
+      tasks: 3,
+    },
+    {
+      id: 3,
+      name: 'Health',
+      image: healthcare,
+      tasks: 6,
+    },
+
+    {
+      id: 5,
+      name: 'Education',
+      color: education,
+      tasks: 5,
+    },
+    {
+      id: 6,
+      name: 'General',
+      color: null,
+      tasks: 2,
+    },
+  ]
 
   // A COLLECTION OF BLOB SHAPES AND COLORS FOR USER GENERATED CATEGORIES
   const blobCollection = [blob1, blob2, blob3, blob4, blob5, blob6]
@@ -126,7 +160,9 @@ const Home = () => {
               <div className='ml-3 '>New Category</div>
             </div>
           </div>
-          {category?.map((cat, index) => {
+          {categoryData?.map((category) => {
+            const { id } = category
+
             // Generate a random tilt angle between -10 and 5 degrees
             const tiltAngle = Math.random() * 20 - 5 + 'deg'
 
@@ -135,25 +171,12 @@ const Home = () => {
             }
 
             return (
-              <div
-                className={`category h-[100px] w-[250px]  flex-1 p-2 flex items-center justify-center`}
-                key={index}
-                style={cardStyle}
-              >
-                <div className='w-[100px] h-[100px]'>
-                  <img
-                    src={getRandomBlob()}
-                    alt='category icon'
-                    className='w-full h-full'
-                  />
-                </div>
-                <div className='flex flex-col flex-1 bg-white pl-8'>
-                  <h1 className='font-bold text-2xl '>Personal</h1>
-                  <p className='text-mainBlack opacity-[0.5] text-base font-bold'>
-                    7 tasks
-                  </p>
-                </div>
-              </div>
+              <CategoryCard
+                category={category}
+                key={id}
+                cardStyle={cardStyle}
+                getRandomBlob={getRandomBlob}
+              />
             )
           })}
         </div>
