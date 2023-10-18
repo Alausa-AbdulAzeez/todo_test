@@ -19,8 +19,15 @@ import {
   shopping,
 } from "../assets/images";
 import CategoryCard from "../components/CategoryCard";
+import BasicModal from "../components/Modal";
+import NewTaskModalComponent from "../components/NewTaskModalComponent";
+import { ToastContainer } from "react-toastify";
+import { useEffect } from "react";
 
 const Home = () => {
+  // DIALOGUE STATE
+  const [open, setOpen] = useState(false);
+
   // INPUT VALUE
   const [inputValue, setInputValue] = useState("");
 
@@ -28,7 +35,7 @@ const Home = () => {
   const [isInputFocused, setInputFocused] = useState(false);
 
   // TODOS
-  const todoData = [
+  const todos = [
     {
       id: 1,
       title: "Finish React Project",
@@ -71,12 +78,10 @@ const Home = () => {
       completed: true,
     },
   ];
-
-  // CURRENTLY COPIED PROMPT
-  const [copied, setCopied] = useState("");
+  const [todoData, setTodoData] = useState([]);
 
   // CATEGORY DATA
-  const categoryData = [
+  const categories = [
     {
       id: 1,
       name: "Work",
@@ -153,6 +158,10 @@ const Home = () => {
       tasks: [],
     },
   ];
+  const [categoryData, setCategoryData] = useState(categories);
+
+  // CURRENTLY COPIED PROMPT
+  const [copied, setCopied] = useState("");
 
   // SELECTED CATEGORY
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -180,6 +189,16 @@ const Home = () => {
     setSelectedCategory(null);
   };
   // END OF FUNCTION TO RESET INPUT VALUE
+
+  // FUNCTIONALITY FOR OPENING AND CLOSING OF DIALOGUE
+  const handleClickOpen = (props) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  // END OF FUNCTIONALITY FOR OPENING AND CLOSING OF DIALOGUE
 
   // FUNCTION TO FILTER TASKS BASED ON INPUT VALUE
   // const filteredTasks = (inputText) => {
@@ -213,6 +232,50 @@ const Home = () => {
   };
   // END OF FUNCTION TO HANDLE INPUT CHANGE
 
+  // useEffect(() => {
+  //   // Load data from local storage on component mount
+  //   const storedTodoData = localStorage.getItem("todoData");
+  //   const storedCategoryData = localStorage.getItem("categoryData");
+
+  //   const initialTodoData = storedTodoData ? JSON.parse(storedTodoData) : todos;
+  //   const initialCategoryData = storedCategoryData
+  //     ? JSON.parse(storedCategoryData)
+  //     : categories;
+
+  //   setTodoData(initialTodoData);
+  //   setCategoryData(initialCategoryData);
+
+  //   return () => {
+  //     // Save data to local storage when the component unmounts
+  //     localStorage.setItem("todoData", JSON.stringify(todoData));
+  //     localStorage.setItem("categoryData", JSON.stringify(categoryData));
+  //   };
+  // }, [todoData, categoryData]);
+
+  useEffect(() => {
+    const storedTodoData = localStorage.getItem("todoData");
+    const storedCategoryData = localStorage.getItem("categoryData");
+
+    const initialTodoData = storedTodoData ? JSON.parse(storedTodoData) : todos;
+    const initialCategoryData = storedCategoryData
+      ? JSON.parse(storedCategoryData)
+      : categories;
+
+    setTodoData(initialTodoData);
+    setFilteredTodoDataList(initialTodoData);
+    setCategoryData(initialCategoryData);
+  }, []);
+
+  // Save data to local storage when the component unmounts
+  useEffect(() => {
+    const saveTodoData = JSON.stringify(todoData);
+    const saveCategoryData = JSON.stringify(categoryData);
+
+    localStorage.setItem("todoData", saveTodoData);
+    localStorage.setItem("categoryData", saveCategoryData);
+    setFilteredTodoDataList(todoData);
+  }, [todoData, categoryData]); // Save data when these dependencies change
+
   return (
     <>
       <img
@@ -220,11 +283,23 @@ const Home = () => {
         alt=""
         className=" h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
       />
+      <ToastContainer />
+      <BasicModal
+        open={open}
+        handleClose={handleClose}
+        NewTaskModalComponent={NewTaskModalComponent}
+        categoryData={categoryData}
+        setTodoData={setTodoData}
+        todoData={todoData}
+      />
       <div
         className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
       >
         <div className="flex-1 w-[100px] h-full flex items-center ">
-          <div className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
+          <div
+            className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow"
+            onClick={handleClickOpen}
+          >
             <BsPen />
             <div className="ml-3 ">New Task</div>
           </div>
