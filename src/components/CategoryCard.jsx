@@ -5,14 +5,16 @@ const CategoryCard = ({
   setSelectedCategory,
   setFilteredTodoDataList,
   selectedCategory,
+  todoData,
 }) => {
   // CATEGORY PROP
-  const { id, image, name, tasks } = category;
+  const { id, image, name } = category;
 
+  const tasks = todoData.filter((task) => task.category === name);
   // FUNCTION TO HANDLE SELECTED CATEGORY
   const handleSelectedCategory = (category) => {
     setSelectedCategory(category);
-    setFilteredTodoDataList(category?.tasks);
+    setFilteredTodoDataList(tasks);
   };
   // END OF FUNCTION TO HANDLE SELECTED CATEGORY
 

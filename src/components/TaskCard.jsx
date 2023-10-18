@@ -55,7 +55,10 @@ const TaskCard = ({ todo, setCopied, copied, handleClickOpen }) => {
             >
               Edit
             </div>
-            <div className="text-mainRed py-1 px-3 rounded-[4px]  hover:bg-mainRed hover:text-white  flex items-center font-semibold">
+            <div
+              className="text-mainRed py-1 px-3 rounded-[4px]  hover:bg-mainRed hover:text-white  flex items-center font-semibold"
+              onClick={() => handleClickOpen("Delete", todo)}
+            >
               Delete
             </div>
             <div className="text-mainGreen py-1 px-3 rounded-[4px] hover:bg-mainGreen hover:text-white  flex items-center font-semibold">

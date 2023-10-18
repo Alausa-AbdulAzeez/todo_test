@@ -86,76 +86,27 @@ const Home = () => {
       id: 1,
       name: "Work",
       image: briefcase,
-      tasks: [
-        {
-          id: 1,
-          title: "Finish React Project",
-          description:
-            "Complete the frontend and backend integration for the React project.",
-          category: "Work",
-          dateCreated: "2023-10-15",
-          completed: false,
-        },
-        {
-          id: 3,
-          title: "Prepare Presentation",
-          description: "Create a presentation for the upcoming meeting.",
-          category: "Work",
-          dateCreated: "2023-10-17",
-          completed: true,
-        },
-      ],
     },
     {
       id: 2,
       name: "Personal",
       image: shopping,
-      tasks: [
-        {
-          id: 2,
-          title: "Grocery Shopping",
-          description: "Buy fruits, vegetables, and household essentials.",
-          category: "Personal",
-          dateCreated: "2023-10-16",
-          completed: false,
-        },
-        {
-          id: 5,
-          title: "Read a Book",
-          description: "Spend an hour reading a new novel.",
-          category: "Personal",
-          dateCreated: "2023-10-19",
-          completed: true,
-        },
-      ],
     },
     {
       id: 3,
       name: "Health",
       image: healthcare,
-      tasks: [
-        {
-          id: 4,
-          title: "Gym Workout",
-          description: "Hit the gym for a workout session.",
-          category: "Health",
-          dateCreated: "2023-10-18",
-          completed: false,
-        },
-      ],
     },
 
     {
       id: 5,
       name: "Education",
       color: education,
-      tasks: [],
     },
     {
       id: 6,
       name: "General",
       color: null,
-      tasks: [],
     },
   ];
   const [categoryData, setCategoryData] = useState(categories);
@@ -206,6 +157,10 @@ const Home = () => {
       setModalType("Edit");
       setTaskToBeEdited(task);
     }
+    if (type === "Delete") {
+      setModalType("Delete");
+      setTaskToBeEdited(task);
+    }
   };
 
   const handleClose = () => {
@@ -238,7 +193,9 @@ const Home = () => {
     const storedTodoData = localStorage.getItem("todoData");
     const storedCategoryData = localStorage.getItem("categoryData");
 
-    const initialTodoData = storedTodoData ? JSON.parse(storedTodoData) : todos;
+    const initialTodoData = storedTodoData
+      ? JSON.parse(storedTodoData)
+      : todoData;
     const initialCategoryData = storedCategoryData
       ? JSON.parse(storedCategoryData)
       : categories;
@@ -382,6 +339,7 @@ const Home = () => {
                   setSelectedCategory={setSelectedCategory}
                   setFilteredTodoDataList={setFilteredTodoDataList}
                   selectedCategory={selectedCategory}
+                  todoData={todoData}
                 />
               );
             })

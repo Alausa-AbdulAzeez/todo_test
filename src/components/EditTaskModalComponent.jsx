@@ -1,6 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const EditTaskModalComponent = ({
   handleClose,
@@ -38,7 +38,7 @@ const EditTaskModalComponent = ({
   };
   //   END OF FUNCTION TO HANDLE SETTING TASK DATA
 
-  //   FUNCTION TO HAANDLE TASK CREATION
+  //   FUNCTION TO HAANDLE TASK EDITING
   const handleCreateTask = () => {
     // FIND THE TASK TO BE UPDATED BY IT'S ID
     const updatedTask = todoData.find((task) => task.id === taskData.id);
@@ -81,7 +81,7 @@ const EditTaskModalComponent = ({
 
     setInputState((prev) => !prev);
   };
-  //   END OF FUNCTION TO HAANDLE TASK CREATION
+  //   END OF FUNCTION TO HAANDLE TASK EDITING
   return (
     <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between">
       <div className="h-[45px] font-medium ml-2 text-lwPurple flex justify-start items-center">
