@@ -6,7 +6,7 @@ import briefcase from "./briefcase.png";
 import shopping from "./shopping.png";
 import healthcare from "./healthcare.png";
 import education from "./education.png";
-import todoBG from "./todoBG.svg";
+import todoBG from "./todoBg.svg";
 
 export {
   boy,
