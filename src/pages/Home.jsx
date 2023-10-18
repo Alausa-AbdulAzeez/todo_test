@@ -293,7 +293,9 @@ const Home = () => {
             onClick={() => handleClickOpen("Add")}
           >
             <BsPen />
-            <div className="ml-3 ">New Task</div>
+            <div className="ml-3 " data-testid="newTaskId">
+              New Task
+            </div>
           </div>
         </div>
         <div className=" flex flex-[4] h-full  items-center max-md:flex-[2]">
