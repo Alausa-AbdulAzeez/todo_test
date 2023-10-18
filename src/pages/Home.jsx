@@ -166,6 +166,12 @@ const Home = () => {
   // SELECTED CATEGORY
   const [selectedCategory, setSelectedCategory] = useState(null);
 
+  // SET MODAL CONTENT TYPE
+  const [modalType, setModalType] = useState("");
+
+  // SET TASK TO BE EDITED
+  const [taskToBeEdited, setTaskToBeEdited] = useState({});
+
   // FILTERED CATEGORY AND TASKS
   const [filteredCategoryList, setFilteredCategoryList] =
     useState(categoryData);
@@ -191,26 +197,21 @@ const Home = () => {
   // END OF FUNCTION TO RESET INPUT VALUE
 
   // FUNCTIONALITY FOR OPENING AND CLOSING OF DIALOGUE
-  const handleClickOpen = (props) => {
+  const handleClickOpen = (type, task) => {
     setOpen(true);
+    if (type === "Add") {
+      setModalType("Add");
+    }
+    if (type === "Edit") {
+      setModalType("Edit");
+      setTaskToBeEdited(task);
+    }
   };
 
   const handleClose = () => {
     setOpen(false);
   };
   // END OF FUNCTIONALITY FOR OPENING AND CLOSING OF DIALOGUE
-
-  // FUNCTION TO FILTER TASKS BASED ON INPUT VALUE
-  // const filteredTasks = (inputText) => {
-
-  // };
-  // END OF FUNCTION TO FILTER TASKS BASED ON INPUT VALUE
-
-  // FUNCTION TO FILTER CATEGORIES BASED ON INPUT VALUE
-  // const filteredCategories = (inputText) => {
-
-  // };
-  // END OF FUNCTION TO FILTER CATEGORIES BASED ON INPUT VALUE
 
   // FUNCTION TO HANDLE INPUT CHANGE
   const handleInputChange = (e) => {
@@ -230,28 +231,9 @@ const Home = () => {
     setFilteredCategoryList(filteredCategories);
     setFilteredTodoDataList(filteredTasks);
   };
-  // END OF FUNCTION TO HANDLE INPUT CHANGE
+  // END OF FUNCTION TO HANDLE INP
 
-  // useEffect(() => {
-  //   // Load data from local storage on component mount
-  //   const storedTodoData = localStorage.getItem("todoData");
-  //   const storedCategoryData = localStorage.getItem("categoryData");
-
-  //   const initialTodoData = storedTodoData ? JSON.parse(storedTodoData) : todos;
-  //   const initialCategoryData = storedCategoryData
-  //     ? JSON.parse(storedCategoryData)
-  //     : categories;
-
-  //   setTodoData(initialTodoData);
-  //   setCategoryData(initialCategoryData);
-
-  //   return () => {
-  //     // Save data to local storage when the component unmounts
-  //     localStorage.setItem("todoData", JSON.stringify(todoData));
-  //     localStorage.setItem("categoryData", JSON.stringify(categoryData));
-  //   };
-  // }, [todoData, categoryData]);
-
+  // USE EFFECT TO GET AND SET DATA FROM LOCAL STORAGE
   useEffect(() => {
     const storedTodoData = localStorage.getItem("todoData");
     const storedCategoryData = localStorage.getItem("categoryData");
@@ -266,7 +248,7 @@ const Home = () => {
     setCategoryData(initialCategoryData);
   }, []);
 
-  // Save data to local storage when the component unmounts
+  // USE EFFECT TO SAVE DATA TO LOCAL STORAGE
   useEffect(() => {
     const saveTodoData = JSON.stringify(todoData);
     const saveCategoryData = JSON.stringify(categoryData);
@@ -274,7 +256,7 @@ const Home = () => {
     localStorage.setItem("todoData", saveTodoData);
     localStorage.setItem("categoryData", saveCategoryData);
     setFilteredTodoDataList(todoData);
-  }, [todoData, categoryData]); // Save data when these dependencies change
+  }, [todoData, categoryData]);
 
   return (
     <>
@@ -291,6 +273,8 @@ const Home = () => {
         categoryData={categoryData}
         setTodoData={setTodoData}
         todoData={todoData}
+        modalType={modalType}
+        taskToBeEdited={taskToBeEdited}
       />
       <div
         className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
@@ -298,7 +282,7 @@ const Home = () => {
         <div className="flex-1 w-[100px] h-full flex items-center ">
           <div
             className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow"
-            onClick={handleClickOpen}
+            onClick={() => handleClickOpen("Add")}
           >
             <BsPen />
             <div className="ml-3 ">New Task</div>
@@ -359,6 +343,7 @@ const Home = () => {
                   key={id}
                   setCopied={setCopied}
                   copied={copied}
+                  handleClickOpen={handleClickOpen}
                 />
               );
             })

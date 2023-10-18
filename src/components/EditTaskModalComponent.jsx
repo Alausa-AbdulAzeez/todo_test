@@ -2,51 +2,26 @@ import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
-const NewTaskModalComponent = ({
+const EditTaskModalComponent = ({
   handleClose,
   categoryData,
   setTodoData,
   todoData,
+  taskToBeEdited,
 }) => {
-  // FUNCTION TO CONVERT DATE
-  const convertDate = () => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Months are zero-based, so add 1 and pad with leading zero if needed
-    const day = String(currentDate.getDate()).padStart(2, "0"); // Pad with leading zero if needed
-
-    const formattedDate = `${year}-${month}-${day}`;
-    return formattedDate;
-  };
-  // END OF FUNCTION TO CONVERT DATE
-
-  // FUNCTION TO GENERATE ID
-  function generateUniqueId() {
-    // Create a timestamp
-    const timestamp = new Date().getTime();
-
-    // Generate a random number
-    const random = Math.floor(Math.random() * 10000);
-
-    // Combine the timestamp and random number to create a unique ID
-    const uniqueId = `${timestamp}-${random}`;
-
-    return uniqueId;
-  }
-
-  // END OF FUNCTION TO GENERATE ID
+  console.log(taskToBeEdited);
 
   //  THE STATE OF THE INPUTS
   const [inputState, setInputState] = useState(false);
 
   // TASK DATA
   const [taskData, setTaskData] = useState({
-    id: generateUniqueId(),
-    title: "",
-    description: "",
-    category: "",
-    dateCreated: convertDate(),
-    completed: false,
+    id: taskToBeEdited?.id,
+    title: taskToBeEdited?.title,
+    description: taskToBeEdited?.description,
+    category: taskToBeEdited?.category,
+    dateCreated: taskToBeEdited?.dateCreated,
+    completed: taskToBeEdited?.completed,
   });
 
   //   FUNCTION TO HANDLE SETTING TASK DATA
@@ -65,24 +40,19 @@ const NewTaskModalComponent = ({
 
   //   FUNCTION TO HAANDLE TASK CREATION
   const handleCreateTask = () => {
-    setInputState((prev) => !prev);
+    // FIND THE TASK TO BE UPDATED BY IT'S ID
+    const updatedTask = todoData.find((task) => task.id === taskData.id);
 
-    console.log(todoData);
-
-    setTodoData([taskData, ...todoData]);
-
-    // CCLEAR INPUT FIELDS
-    setTaskData({
-      id: "",
-      title: "",
-      description: "",
-      category: "",
-      dateCreated: "",
-      completed: false,
-    });
+    if (updatedTask) {
+      updatedTask.title = taskData.title;
+      updatedTask.description = taskData.description;
+      updatedTask.category = taskData.category;
+      updatedTask.dateCreated = taskData.dateCreated;
+      updatedTask.completed = taskData.completed;
+    }
 
     // TOAST
-    toast("Task added successfully!", {
+    toast("Task edited successfully!", {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -94,14 +64,28 @@ const NewTaskModalComponent = ({
       type: "success",
     });
 
+    // CLEAR INPUT FIELDS
+    setTaskData({
+      id: "",
+      title: "",
+      description: "",
+      category: "",
+      dateCreated: "",
+      completed: false,
+    });
+
     // CLOSE MODAL
     handleClose();
+
+    setTodoData([...todoData]);
+
+    setInputState((prev) => !prev);
   };
   //   END OF FUNCTION TO HAANDLE TASK CREATION
   return (
     <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between">
       <div className="h-[45px] font-medium ml-2 text-lwPurple flex justify-start items-center">
-        New Task
+        Edit Task
       </div>
       <div className="border-t border-b border-b-silver border-t-silver flex-1 flex flex-wrap gap-3 p-2">
         <TextField
@@ -112,6 +96,8 @@ const NewTaskModalComponent = ({
           size={"small"}
           onChange={(e) => handleTaskInfo(e, "title")}
           key={inputState}
+          value={taskData?.title}
+          inputLabelProps={{ shrink: true }}
         />
         <div className="w-[223px]">
           <Autocomplete
@@ -122,8 +108,14 @@ const NewTaskModalComponent = ({
             getOptionLabel={(option) => `${option?.name}`}
             onChange={(e, option) => handleTaskInfo(e, "category", option)}
             size={"small"}
+            InputLabelProps={{ shrink: true }}
             renderInput={(params) => (
-              <TextField {...params} label="Category *" />
+              <TextField
+                {...params}
+                label="Category *"
+                placeholder={taskData?.category}
+                InputLabelProps={{ shrink: true }}
+              />
             )}
           />
         </div>
@@ -139,6 +131,8 @@ const NewTaskModalComponent = ({
             size="small"
             onChange={(e) => handleTaskInfo(e, "description")}
             key={inputState}
+            value={taskData?.description}
+            inputLabelProps={{ shrink: true }}
           />
         </div>
       </div>
@@ -163,4 +157,4 @@ const NewTaskModalComponent = ({
   );
 };
 
-export default NewTaskModalComponent;
+export default EditTaskModalComponent;

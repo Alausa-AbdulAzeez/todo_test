@@ -1,6 +1,6 @@
 import { copy, tick } from "../assets/images";
 
-const TaskCard = ({ todo, setCopied, copied }) => {
+const TaskCard = ({ todo, setCopied, copied, handleClickOpen }) => {
   // TASK PROPS
   const { id, title, description, category, dateCreated } = todo;
 
@@ -49,7 +49,10 @@ const TaskCard = ({ todo, setCopied, copied }) => {
           </div>
 
           <div className="flex gap-0">
-            <div className="text-mainPurple py-1 px-3 rounded-[4px] hover:bg-mainPurple hover:text-white  flex items-center font-semibold">
+            <div
+              className="text-mainPurple py-1 px-3 rounded-[4px] hover:bg-mainPurple hover:text-white  flex items-center font-semibold"
+              onClick={() => handleClickOpen("Edit", todo)}
+            >
               Edit
             </div>
             <div className="text-mainRed py-1 px-3 rounded-[4px]  hover:bg-mainRed hover:text-white  flex items-center font-semibold">

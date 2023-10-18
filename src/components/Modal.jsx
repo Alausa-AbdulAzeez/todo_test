@@ -1,5 +1,6 @@
 import * as React from "react";
 import Modal from "@mui/material/Modal";
+import EditTaskModalComponent from "./EditTaskModalComponent";
 
 const style = {
   position: "absolute",
@@ -20,6 +21,8 @@ export default function BasicModal({
   categoryData,
   setTodoData,
   todoData,
+  modalType,
+  taskToBeEdited,
 }) {
   return (
     <div>
@@ -31,12 +34,23 @@ export default function BasicModal({
         className="h-[100%] w-[100%] flex items-center justify-center "
       >
         <>
-          <NewTaskModalComponent
-            handleClose={handleClose}
-            categoryData={categoryData}
-            setTodoData={setTodoData}
-            todoData={todoData}
-          />
+          {modalType === "Add" && (
+            <NewTaskModalComponent
+              handleClose={handleClose}
+              categoryData={categoryData}
+              setTodoData={setTodoData}
+              todoData={todoData}
+            />
+          )}
+          {modalType === "Edit" && (
+            <EditTaskModalComponent
+              handleClose={handleClose}
+              categoryData={categoryData}
+              setTodoData={setTodoData}
+              todoData={todoData}
+              taskToBeEdited={taskToBeEdited}
+            />
+          )}
         </>
       </Modal>
     </div>
