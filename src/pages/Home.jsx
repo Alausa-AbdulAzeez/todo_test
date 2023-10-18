@@ -329,7 +329,7 @@ const Home = () => {
         </div>
       </div>
       <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-md:flex-col">
-        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:flex-none max-md:h-[70%]">
+        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:flex-none ">
           <h1 className="text-2xl font-bold">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
@@ -387,16 +387,16 @@ const Home = () => {
               })
           )}
         </div>
-        <div className="flex-1 flex flex-col gap-3 items-center  overflow-y-auto">
-          <div className="flex w-full">
+        <div className="flex-1 flex flex-col gap-3 items-center  overflow-y-auto ">
+          <div
+            className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]"
+            onClick={() => handleClickOpen("AddCat")}
+          >
+            <BsPen />
+            <div className="ml-3 ">New Category</div>
+          </div>
+          <div className="flex w-full max-md:hidden ">
             <h1 className="text-2xl font-bold text-left ">Categories</h1>
-            <div
-              className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]"
-              onClick={() => handleClickOpen("AddCat")}
-            >
-              <BsPen />
-              <div className="ml-3 ">New Category</div>
-            </div>
           </div>
           {filteredCategoryList?.length === 0 ? (
             <div className="w-full h-full flex flex-col items-center justify-start">
