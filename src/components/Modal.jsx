@@ -3,6 +3,7 @@ import Modal from "@mui/material/Modal";
 import EditTaskModalComponent from "./EditTaskModalComponent";
 import DeleteTaskModalComponent from "./DeleteTaskModalContent";
 import AddCategoryModalComponent from "./AddCategoryModalComponent";
+import DeleteCategoryModalComponent from "./DeleteCategoryModalContent";
 
 export default function BasicModal({
   open,
@@ -14,6 +15,7 @@ export default function BasicModal({
   modalType,
   taskToBeEdited,
   setCategoryData,
+  categoryToBeWorked,
 }) {
   return (
     <div>
@@ -49,6 +51,14 @@ export default function BasicModal({
               setTodoData={setTodoData}
               todoData={todoData}
               taskToBeEdited={taskToBeEdited}
+            />
+          )}
+          {modalType === "DeleteCat" && (
+            <DeleteCategoryModalComponent
+              handleClose={handleClose}
+              categoryData={categoryData}
+              setCategoryData={setCategoryData}
+              categoryToBeWorked={categoryToBeWorked}
             />
           )}
           {modalType === "AddCat" && (

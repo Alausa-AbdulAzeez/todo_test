@@ -1,4 +1,5 @@
 import { BsTrash } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 const CategoryCard = ({
   category,
@@ -8,6 +9,8 @@ const CategoryCard = ({
   setFilteredTodoDataList,
   selectedCategory,
   todoData,
+  categoryToBeWorked,
+  handleClickOpen,
 }) => {
   // CATEGORY PROP
   const { id, image, name } = category;
@@ -23,6 +26,21 @@ const CategoryCard = ({
   // FUNCTION TO HANDLE SELECTED CATEGORY
   const handleSelectedCategory = (e, category) => {
     if (e.target.localName === "svg") {
+      if (tasks?.length > 0 || completedTasks?.length > 0) {
+        toast("This item cannot be deleted as it has tasks attached to it", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          type: "info",
+        });
+      } else {
+        handleClickOpen("DeleteCat", category);
+      }
     } else {
       setSelectedCategory(category);
       if (category?.name === "Completed") {

@@ -31,6 +31,7 @@ const AddCategoryModalComponent = ({
     id: generateUniqueId(),
     name: "",
     image: null,
+    default: false,
   });
 
   //   FUNCTION TO HANDLE SETTING CATEGORY NAME
@@ -50,6 +51,7 @@ const AddCategoryModalComponent = ({
       id: generateUniqueId(),
       name: "",
       image: null,
+      default: false,
     });
 
     // TOAST

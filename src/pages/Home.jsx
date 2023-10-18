@@ -86,32 +86,38 @@ const Home = () => {
       id: 100,
       name: "Completed",
       image: briefcase,
+      default: true,
     },
     {
       id: 1,
       name: "Work",
       image: briefcase,
+      default: true,
     },
     {
       id: 2,
       name: "Personal",
       image: shopping,
+      default: true,
     },
     {
       id: 3,
       name: "Health",
       image: healthcare,
+      default: true,
     },
 
     {
       id: 5,
       name: "Education",
       color: education,
+      default: true,
     },
     {
       id: 6,
       name: "General",
       color: null,
+      default: true,
     },
   ];
   const [categoryData, setCategoryData] = useState(categories);
@@ -121,6 +127,9 @@ const Home = () => {
 
   // SELECTED CATEGORY
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // SELECTED CATEGORY TO BE WORKED ON
+  const [categoryToBeWorked, setCategoryToBeWorked] = useState(null);
 
   // SET MODAL CONTENT TYPE
   const [modalType, setModalType] = useState("");
@@ -165,6 +174,10 @@ const Home = () => {
     if (type === "Delete") {
       setModalType("Delete");
       setTaskToBeEdited(task);
+    }
+    if (type === "DeleteCat") {
+      setModalType("DeleteCat");
+      setCategoryToBeWorked(task);
     }
     if (type === "AddCat") {
       setModalType("AddCat");
@@ -255,6 +268,7 @@ const Home = () => {
         modalType={modalType}
         taskToBeEdited={taskToBeEdited}
         setCategoryData={setCategoryData}
+        categoryToBeWorked={categoryToBeWorked}
       />
       <div
         className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
@@ -301,7 +315,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {console.log(selectedCategory)}
       <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5">
         <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll">
           <h1 className="text-2xl font-bold">
@@ -398,6 +411,8 @@ const Home = () => {
                   setFilteredTodoDataList={setFilteredTodoDataList}
                   selectedCategory={selectedCategory}
                   todoData={todoData}
+                  categoryToBeWorked={categoryToBeWorked}
+                  handleClickOpen={handleClickOpen}
                 />
               );
             })
