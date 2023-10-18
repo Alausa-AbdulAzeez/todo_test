@@ -6,6 +6,7 @@ import briefcase from "./briefcase.png";
 import shopping from "./shopping.png";
 import healthcare from "./healthcare.png";
 import education from "./education.png";
+import checkedImg from "./checkedImg.png";
 import todoBG from "./todoBg.svg";
 
 export {
@@ -18,4 +19,5 @@ export {
   education,
   empty,
   todoBG,
+  checkedImg,
 };

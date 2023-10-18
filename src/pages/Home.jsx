@@ -12,6 +12,7 @@ import TaskCard from "../components/TaskCard";
 import { useState } from "react";
 import {
   briefcase,
+  checkedImg,
   education,
   empty,
   healthcare,
@@ -85,7 +86,7 @@ const Home = () => {
     {
       id: 100,
       name: "Completed",
-      image: briefcase,
+      image: checkedImg,
       default: true,
     },
     {
@@ -329,7 +330,7 @@ const Home = () => {
         </div>
       </div>
       <div className=" px-20 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-lg:px-6  max-md:flex-col">
-        <div className="w-[70%] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:w-[100%] max-lg:flex-none max-lg:w-[60%] max-xl:w-[65%]">
+        <div className="w-[70%] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:w-[100%] max-lg:flex-none max-lg:w-[60%] max-xl:w-[65%] max-xl:overflow-y-auto">
           <h1 className="text-2xl font-bold">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
@@ -339,7 +340,7 @@ const Home = () => {
               ?.length === 0 ? (
               <div className="w-full h-full flex flex-col items-center justify-start">
                 <img src={empty} alt="empty" className="h-[60%]" />
-                <h3 className="text-2xl font-bold text-[#7c7c7c]">
+                <h3 className="text-2xl font-bold text-[#7c7c7c] text-center">
                   There's nothing to show here
                 </h3>
               </div>
@@ -365,7 +366,7 @@ const Home = () => {
               ?.length === 0 ? (
             <div className="w-full h-full flex flex-col items-center justify-start">
               <img src={empty} alt="empty" className="h-[60%]" />
-              <h3 className="text-2xl font-bold text-[#7c7c7c]">
+              <h3 className="text-2xl font-bold text-[#7c7c7c] text-center">
                 There's nothing to show here
               </h3>
             </div>
@@ -401,7 +402,7 @@ const Home = () => {
           {filteredCategoryList?.length === 0 ? (
             <div className="w-full h-full flex flex-col items-center justify-start">
               <img src={empty} alt="empty" className="h-[50%]" />
-              <h3 className="text-xl font-bold text-[#7c7c7c]">
+              <h3 className="text-xl font-bold text-[#7c7c7c] text-center">
                 There's nothing to show here
               </h3>
             </div>

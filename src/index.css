@@ -20,15 +20,6 @@
   text-shadow: 0 0 10px #4a4b4b, 0 0 20px #4a4b4b, 0 0 30px #4a4b4b;
 }
 
-/* @keyframes glow {
-  0% {
-    text-shadow: 0 0 10px #4a4b4b, 0 0 20px #4a4b4b, 0 0 30px #4a4b4b;
-  }
-  100% {
-    text-shadow: 0 0 20px #4a4b4b, 0 0 30px #4a4b4b, 0 0 40px #4a4b4b;
-  }
-} */
-
 /* CATEGORY CARD */
 .category {
   background: #fff;

@@ -1,6 +1,6 @@
 import { Autocomplete, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const NewTaskModalComponent = ({
   handleClose,
@@ -115,7 +115,7 @@ const NewTaskModalComponent = ({
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={categoryData}
+            options={categoryData?.filter((category) => category?.id !== 100)}
             key={inputState}
             getOptionLabel={(option) => `${option?.name}`}
             onChange={(e, option) => handleTaskInfo(e, "category", option)}

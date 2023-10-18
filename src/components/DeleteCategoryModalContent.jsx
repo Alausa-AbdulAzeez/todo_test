@@ -9,14 +9,11 @@ const DeleteCategoryModalComponent = ({
   categoryToBeWorked,
   setCategoryData,
 }) => {
-  console.log(categoryToBeWorked);
-
   //   FUNCTION TO HAANDLE TASK DELETE
   const handleDeleteTask = () => {
     const categoryId = categoryToBeWorked?.id;
 
     if (categoryToBeWorked?.default === true) {
-      console.log("aa");
       // TOAST
       toast("This item cannot be deleted because it is a default category!", {
         position: "top-center",
@@ -30,7 +27,6 @@ const DeleteCategoryModalComponent = ({
         type: "info",
       });
     } else {
-      console.log(categoryToBeWorked?.default);
       const updatedCategoryData = categoryData.filter(
         (category) => category.id !== categoryId
       );

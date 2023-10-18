@@ -9,8 +9,6 @@ const EditTaskModalComponent = ({
   todoData,
   taskToBeEdited,
 }) => {
-  console.log(taskToBeEdited);
-
   //  THE STATE OF THE INPUTS
   const [inputState, setInputState] = useState(false);
 

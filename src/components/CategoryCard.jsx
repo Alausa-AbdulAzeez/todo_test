@@ -64,7 +64,7 @@ const CategoryCard = ({
       <div className="absolute bottom-[10px] right-[10px]">
         <BsTrash className="text-red-800" />
       </div>
-      <div className="w-[100px] h-[100px]">
+      <div className="w-[100px] h-[100px] flex items-center">
         <img
           src={image ? image : getRandomBlob()}
           alt="category icon"
