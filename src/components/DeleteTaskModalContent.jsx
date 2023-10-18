@@ -35,7 +35,7 @@ const DeleteTaskModalComponent = ({
 
   //   END OF FUNCTION TO HAANDLE TASK DELETE
   return (
-    <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between">
+    <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between max-md:w-[350px]    ">
       <div className="text-red-600 h-[45px] font-medium ml-2 text-lwPurple flex justify-start items-center">
         CONFIRM DELETE
       </div>

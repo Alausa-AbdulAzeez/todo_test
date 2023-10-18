@@ -97,7 +97,7 @@ const NewTaskModalComponent = ({
   };
   //   END OF FUNCTION TO HAANDLE TASK CREATION
   return (
-    <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between">
+    <div className="w-[500px] min-h-[200px] max-h-[300px] p-3 rounded-lg bg-white flex flex-col justify-between max-md:w-[350px]">
       <div className="h-[45px] font-medium ml-2 text-lwPurple flex justify-start items-center">
         New Task
       </div>

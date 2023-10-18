@@ -23,14 +23,15 @@ const TaskCard = ({
 
   return (
     <div
-      className="task h-[300px] min-w-[300px]  flex-1  flex items-center max-h-[142px]"
+      className="task h-[300px] min-w-[300px]  flex-1  flex items-center max-h-[142px] text-sm"
       key={id}
     >
       <div className="flex flex-col flex-1 bg-white  h-[110px] overflow-y-auto overflow-x-hidden relative items-center">
-        <h3 className="font-bold text-lg text-left w-full text-[#494949]">
-          {title} <span className="ml-5 text-mainGreen">({category})</span>
+        <h3 className="font-bold text-lg text-left w-full text-[#494949] max-md:text-base">
+          {title}{" "}
+          <span className="ml-5 text-mainGreen max-md:ml-1">({category})</span>
         </h3>
-        <h3 className="font-bold text-md text-left w-full text-[#999]">
+        <h3 className="font-bold text-md text-left w-full text-[#999] max-sm:text-xs max-md:text-sm">
           {description}
         </h3>
         <div className="absolute bottom-[0px] w-[100%] h-[35px] flex justify-between">
@@ -49,7 +50,7 @@ const TaskCard = ({
               />
             </div>
 
-            <h3 className="font-bold text-sm text-left w-full text-[#999]">
+            <h3 className="font-bold text-sm text-left w-full text-[#999] max-md:hidden">
               Created at: <span className="text-[#494949]">{dateCreated}</span>
             </h3>
           </div>

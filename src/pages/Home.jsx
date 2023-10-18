@@ -1,4 +1,3 @@
-import todoBG from "../assets/images/todoBG.svg";
 import {
   blob1,
   blob2,
@@ -17,11 +16,12 @@ import {
   empty,
   healthcare,
   shopping,
+  todoBG,
 } from "../assets/images";
 import CategoryCard from "../components/CategoryCard";
 import BasicModal from "../components/Modal";
 import NewTaskModalComponent from "../components/NewTaskModalComponent";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
 
 const Home = () => {
@@ -193,6 +193,19 @@ const Home = () => {
       return item;
     });
     setTodoData(updatedList);
+
+    // TOAST
+    toast("Task completed successfully!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      type: "success",
+    });
   };
   // END OF FUNCTION TO TOGGLE COMPLETION
 
@@ -255,7 +268,7 @@ const Home = () => {
       <img
         src={todoBG}
         alt=""
-        className=" h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
+        className="h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
       />
       <ToastContainer />
       <BasicModal
@@ -271,22 +284,22 @@ const Home = () => {
         categoryToBeWorked={categoryToBeWorked}
       />
       <div
-        className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
+        className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 max-md:px-3`}
       >
         <div className="flex-1 w-[100px] h-full flex items-center ">
           <div
-            className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow"
+            className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow "
             onClick={() => handleClickOpen("Add")}
           >
             <BsPen />
             <div className="ml-3 ">New Task</div>
           </div>
         </div>
-        <div className=" flex flex-[4] h-full  items-center">
+        <div className=" flex flex-[4] h-full  items-center max-md:flex-[2]">
           <div
             className={`h-[50px] flex items-center bg-white rounded-[8px] w-full px-4 inputContainer relative ${
               isInputFocused && "drop-shadow-2xl"
-            }`}
+            } max-md:w-50% `}
           >
             {selectedCategory && (
               <div className="absolute left-14 cursor-pointer flex flex-row-reverse h-[40px] bg-[#cacaca] text-white font-bold items-center px-3 py-5 rounded-[8px] shadow">
@@ -299,7 +312,7 @@ const Home = () => {
             <input
               type="text"
               className="h-full bg-transparent w-full outline-none border-none ml-4 text-[#999] font-semibold text-lg"
-              placeholder="Search"
+              placeholder={selectedCategory ? "" : "Search"}
               onFocus={() => setInputFocused(true)}
               onBlur={() => setInputFocused(false)}
               value={inputValue}
@@ -315,8 +328,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5">
-        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll">
+      <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-md:flex-col">
+        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:flex-none max-md:h-[70%]">
           <h1 className="text-2xl font-bold">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
