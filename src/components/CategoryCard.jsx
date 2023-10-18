@@ -16,12 +16,12 @@ const CategoryCard = ({
   const { id, image, name } = category;
 
   // FILTER TASKS BY CATEGORY
-  const tasks = todoData.filter(
-    (task) => task.category === name && task.completed === false
+  const tasks = todoData?.filter(
+    (task) => task?.category === name && task?.completed === false
   );
 
   // FILTER TASKS BY COMPLETED STATUS
-  const completedTasks = todoData.filter((task) => task.completed === true);
+  const completedTasks = todoData?.filter((task) => task?.completed === true);
 
   // FUNCTION TO HANDLE SELECTED CATEGORY
   const handleSelectedCategory = (e, category) => {

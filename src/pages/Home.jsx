@@ -321,6 +321,7 @@ const Home = () => {
               value={inputValue}
               onChange={(e) => handleInputChange(e)}
               disabled={selectedCategory ? true : false}
+              data-testid="searchId"
             />
             {inputValue && (
               <HiX
@@ -333,7 +334,7 @@ const Home = () => {
       </div>
       <div className=" px-20 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-lg:px-6  max-md:flex-col">
         <div className="w-[70%] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:w-[100%] max-lg:flex-none max-lg:w-[60%] max-xl:w-[65%] max-xl:overflow-y-auto">
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-2xl font-bold" data-testid="taskList">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
           {selectedCategory?.name === "Completed" ? (
