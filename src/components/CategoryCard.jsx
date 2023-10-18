@@ -1,3 +1,5 @@
+import { BsTrash } from "react-icons/bs";
+
 const CategoryCard = ({
   category,
   cardStyle,
@@ -10,23 +12,40 @@ const CategoryCard = ({
   // CATEGORY PROP
   const { id, image, name } = category;
 
-  const tasks = todoData.filter((task) => task.category === name);
+  // FILTER TASKS BY CATEGORY
+  const tasks = todoData.filter(
+    (task) => task.category === name && task.completed === false
+  );
+
+  // FILTER TASKS BY COMPLETED STATUS
+  const completedTasks = todoData.filter((task) => task.completed === true);
+
   // FUNCTION TO HANDLE SELECTED CATEGORY
-  const handleSelectedCategory = (category) => {
-    setSelectedCategory(category);
-    setFilteredTodoDataList(tasks);
+  const handleSelectedCategory = (e, category) => {
+    if (e.target.localName === "svg") {
+    } else {
+      setSelectedCategory(category);
+      if (category?.name === "Completed") {
+        setFilteredTodoDataList(completedTasks);
+      } else {
+        setFilteredTodoDataList(tasks);
+      }
+    }
   };
   // END OF FUNCTION TO HANDLE SELECTED CATEGORY
 
   return (
     <div
-      className={`category h-[100px] w-[250px]  flex-1 p-2 flex items-center justify-center max-h-[114px] ${
+      className={`relative category h-[100px] w-[250px]  flex-1 p-2 flex items-center justify-center max-h-[114px] ${
         selectedCategory?.id === id && "!bg-[#cacaca]"
       }`}
       key={id}
       style={cardStyle}
-      onClick={() => handleSelectedCategory(category)}
+      onClick={(e) => handleSelectedCategory(e, category)}
     >
+      <div className="absolute bottom-[10px] right-[10px]">
+        <BsTrash className="text-red-800" />
+      </div>
       <div className="w-[100px] h-[100px]">
         <img
           src={image ? image : getRandomBlob()}
@@ -37,11 +56,17 @@ const CategoryCard = ({
       <div className="flex flex-col flex-1  pl-8">
         <h1 className="font-bold text-2xl ">{name}</h1>
         <p className="text-mainBlack opacity-[0.5] text-base font-bold">
-          {tasks?.length === 0
+          {id === 100
+            ? completedTasks?.length === 0
+              ? "No task"
+              : completedTasks?.length === 1
+              ? completedTasks?.length + " Task"
+              : completedTasks?.length + "   Tasks"
+            : tasks?.length === 0
             ? "No task"
             : tasks?.length === 1
             ? tasks?.length + " Task"
-            : tasks?.length + "   Tasks"}{" "}
+            : tasks?.length + "   Tasks"}
         </p>
       </div>
     </div>

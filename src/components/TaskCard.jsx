@@ -1,8 +1,14 @@
 import { copy, tick } from "../assets/images";
 
-const TaskCard = ({ todo, setCopied, copied, handleClickOpen }) => {
+const TaskCard = ({
+  todo,
+  setCopied,
+  copied,
+  handleClickOpen,
+  toggleCompletion,
+}) => {
   // TASK PROPS
-  const { id, title, description, category, dateCreated } = todo;
+  const { id, title, description, category, dateCreated, completed } = todo;
 
   // COPY TO CLIPBOARD FUNCTION
   const handleCopy = () => {
@@ -61,8 +67,11 @@ const TaskCard = ({ todo, setCopied, copied, handleClickOpen }) => {
             >
               Delete
             </div>
-            <div className="text-mainGreen py-1 px-3 rounded-[4px] hover:bg-mainGreen hover:text-white  flex items-center font-semibold">
-              Done
+            <div
+              className="text-mainGreen py-1 px-3 rounded-[4px] hover:bg-mainGreen hover:text-white  flex items-center font-semibold"
+              onClick={() => toggleCompletion(id)}
+            >
+              {completed ? "Mark as undone" : "Done"}
             </div>
           </div>
         </div>

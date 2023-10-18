@@ -81,7 +81,12 @@ const Home = () => {
   const [todoData, setTodoData] = useState([]);
 
   // CATEGORY DATA
-  const categories = [
+  let categories = [
+    {
+      id: 100,
+      name: "Completed",
+      image: briefcase,
+    },
     {
       id: 1,
       name: "Work",
@@ -161,7 +166,22 @@ const Home = () => {
       setModalType("Delete");
       setTaskToBeEdited(task);
     }
+    if (type === "AddCat") {
+      setModalType("AddCat");
+    }
   };
+
+  // FUNCTION TO TOGGLE COMPLETION
+  const toggleCompletion = (itemId) => {
+    const updatedList = todoData.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, completed: !item.completed };
+      }
+      return item;
+    });
+    setTodoData(updatedList);
+  };
+  // END OF FUNCTION TO TOGGLE COMPLETION
 
   const handleClose = () => {
     setOpen(false);
@@ -202,6 +222,7 @@ const Home = () => {
 
     setTodoData(initialTodoData);
     setFilteredTodoDataList(initialTodoData);
+    setFilteredCategoryList(initialCategoryData);
     setCategoryData(initialCategoryData);
   }, []);
 
@@ -213,6 +234,7 @@ const Home = () => {
     localStorage.setItem("todoData", saveTodoData);
     localStorage.setItem("categoryData", saveCategoryData);
     setFilteredTodoDataList(todoData);
+    setFilteredCategoryList(categoryData);
   }, [todoData, categoryData]);
 
   return (
@@ -232,6 +254,7 @@ const Home = () => {
         todoData={todoData}
         modalType={modalType}
         taskToBeEdited={taskToBeEdited}
+        setCategoryData={setCategoryData}
       />
       <div
         className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 `}
@@ -278,13 +301,42 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {console.log(selectedCategory)}
       <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5">
         <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll">
           <h1 className="text-2xl font-bold">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
-
-          {filteredTodoDataList?.length === 0 ? (
+          {selectedCategory?.name === "Completed" ? (
+            filteredTodoDataList?.length === 0 ||
+            filteredTodoDataList?.filter((todo) => todo.completed === true)
+              ?.length === 0 ? (
+              <div className="w-full h-full flex flex-col items-center justify-start">
+                <img src={empty} alt="empty" className="h-[60%]" />
+                <h3 className="text-2xl font-bold text-[#7c7c7c]">
+                  There's nothing to show here
+                </h3>
+              </div>
+            ) : (
+              filteredTodoDataList
+                ?.filter((todo) => todo.completed === true)
+                ?.map((todo) => {
+                  const { id } = todo;
+                  return (
+                    <TaskCard
+                      todo={todo}
+                      key={id}
+                      setCopied={setCopied}
+                      copied={copied}
+                      handleClickOpen={handleClickOpen}
+                      toggleCompletion={toggleCompletion}
+                    />
+                  );
+                })
+            )
+          ) : filteredTodoDataList?.length === 0 ||
+            filteredTodoDataList?.filter((todo) => todo.completed === false)
+              ?.length === 0 ? (
             <div className="w-full h-full flex flex-col items-center justify-start">
               <img src={empty} alt="empty" className="h-[60%]" />
               <h3 className="text-2xl font-bold text-[#7c7c7c]">
@@ -292,24 +344,30 @@ const Home = () => {
               </h3>
             </div>
           ) : (
-            filteredTodoDataList?.map((todo) => {
-              const { id } = todo;
-              return (
-                <TaskCard
-                  todo={todo}
-                  key={id}
-                  setCopied={setCopied}
-                  copied={copied}
-                  handleClickOpen={handleClickOpen}
-                />
-              );
-            })
+            filteredTodoDataList
+              ?.filter((todo) => todo.completed === false)
+              ?.map((todo) => {
+                const { id } = todo;
+                return (
+                  <TaskCard
+                    todo={todo}
+                    key={id}
+                    setCopied={setCopied}
+                    copied={copied}
+                    handleClickOpen={handleClickOpen}
+                    toggleCompletion={toggleCompletion}
+                  />
+                );
+              })
           )}
         </div>
         <div className="flex-1 flex flex-col gap-3 items-center  overflow-y-auto">
           <div className="flex w-full">
             <h1 className="text-2xl font-bold text-left ">Categories</h1>
-            <div className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]">
+            <div
+              className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]"
+              onClick={() => handleClickOpen("AddCat")}
+            >
               <BsPen />
               <div className="ml-3 ">New Category</div>
             </div>

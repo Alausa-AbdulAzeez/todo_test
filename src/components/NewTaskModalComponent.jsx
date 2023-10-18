@@ -67,8 +67,6 @@ const NewTaskModalComponent = ({
   const handleCreateTask = () => {
     setInputState((prev) => !prev);
 
-    console.log(todoData);
-
     setTodoData([taskData, ...todoData]);
 
     // CCLEAR INPUT FIELDS
