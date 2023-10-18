@@ -5,7 +5,7 @@ import {
   blob4,
   blob5,
   blob6,
-} from "../assets/images/blobs";
+} from "../assets/images/blobs/index";
 import { BsPen } from "react-icons/bs";
 import { HiSearch, HiX } from "react-icons/hi";
 import TaskCard from "../components/TaskCard";
@@ -17,7 +17,7 @@ import {
   healthcare,
   shopping,
   todoBG,
-} from "../assets/images";
+} from "../assets/images/index";
 import CategoryCard from "../components/CategoryCard";
 import BasicModal from "../components/Modal";
 import NewTaskModalComponent from "../components/NewTaskModalComponent";
@@ -267,7 +267,7 @@ const Home = () => {
     <>
       <img
         src={todoBG}
-        alt=""
+        alt="home bg"
         className="h-screen w-screen absolute top-0 left-0 object-cover -z-[1]"
       />
       <ToastContainer />

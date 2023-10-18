@@ -1,4 +1,4 @@
-import { copy, tick } from "../assets/images";
+import { copy, tick } from "../assets/images/index";
 
 const TaskCard = ({
   todo,
