@@ -284,7 +284,7 @@ const Home = () => {
         categoryToBeWorked={categoryToBeWorked}
       />
       <div
-        className={`h-[100px] w-full px-32 flex items-center gap-4 sticky top-0 z-20 max-md:px-3`}
+        className={`h-[100px] w-full px-20 flex items-center gap-4 sticky top-0 z-20 max-md:px-3 max-lg:px-6 `}
       >
         <div className="flex-1 w-[100px] h-full flex items-center ">
           <div
@@ -328,8 +328,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className=" px-32 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-md:flex-col">
-        <div className="flex-[3] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:flex-none ">
+      <div className=" px-20 h-screen w-full overflow-x-hidden flex gap-5 max-md:px-3 max-lg:px-6  max-md:flex-col">
+        <div className="w-[70%] py-3 px-4 gap-3 flex flex-col overflow-y-scroll max-md:w-[100%] max-lg:flex-none max-lg:w-[60%] max-xl:w-[65%]">
           <h1 className="text-2xl font-bold">
             Task <span className="text-mainPurple">List</span>{" "}
           </h1>
@@ -387,7 +387,7 @@ const Home = () => {
               })
           )}
         </div>
-        <div className="flex-1 flex flex-col gap-3 items-center  overflow-y-auto ">
+        <div className="flex-1 flex flex-col gap-3 items-center overflow-y-auto max-md:hidden">
           <div
             className="cursor-pointer flex h-[50px] bg-mainPurple text-white font-bold items-center px-3 py-5 rounded-[8px] shadow fixed bottom-[40px] right-[40px] z-[90]"
             onClick={() => handleClickOpen("AddCat")}
@@ -395,7 +395,7 @@ const Home = () => {
             <BsPen />
             <div className="ml-3 ">New Category</div>
           </div>
-          <div className="flex w-full max-md:hidden ">
+          <div className="flex w-full  ">
             <h1 className="text-2xl font-bold text-left ">Categories</h1>
           </div>
           {filteredCategoryList?.length === 0 ? (

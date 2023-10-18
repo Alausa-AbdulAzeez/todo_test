@@ -56,7 +56,7 @@ const CategoryCard = ({
     <div
       className={`relative category h-[100px] w-[250px]  flex-1 p-2 flex items-center justify-center max-h-[114px] ${
         selectedCategory?.id === id && "!bg-[#cacaca]"
-      }`}
+      } max-lg:w-[240px]`}
       key={id}
       style={cardStyle}
       onClick={(e) => handleSelectedCategory(e, category)}
